@@ -15,7 +15,7 @@
   <img alt="Claude" src="https://img.shields.io/badge/AI-Anthropic%20Claude-D97757" />
 </p>
 
-**🌐 Live demo:** [focussmith.com](https://focussmith.com) &nbsp;·&nbsp; **🧩 Chrome extension:** [download the latest release](https://github.com/srinivasthomala/focussmith/releases/latest) &nbsp;·&nbsp; **📚 API docs:** [focusforge-api.fly.dev/docs](https://api.focussmith.com/docs)
+**🌐 Live :** [focussmith.com](https://focussmith.com) &nbsp;·&nbsp; **🧩 Chrome extension:** [download the latest release](https://github.com/srinivasthomala/focussmith/releases/latest) &nbsp;·&nbsp; **📚 API docs:** [focusforge-api.fly.dev/docs](https://api.focussmith.com/docs)
 
 ---
 
