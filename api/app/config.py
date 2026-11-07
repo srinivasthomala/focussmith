@@ -42,7 +42,7 @@ class Settings(BaseSettings):
     agent_max_output_tokens: int = 12000  # summed across a question's calls
 
     # Supabase auth. The dashboard authenticates with a Supabase access token;
-    # the extension uses FocusForge API keys instead, so it needs none of this.
+    # the extension uses FocusSmith API keys instead, so it needs none of this.
     #
     # Modern Supabase projects sign tokens with asymmetric keys (ES256/RS256),
     # verified via the project's JWKS endpoint — set SUPABASE_URL for that.

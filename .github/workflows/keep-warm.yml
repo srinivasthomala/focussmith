@@ -31,7 +31,7 @@ jobs:
     env:
       SUPABASE_URL: https://egqjlomtqsynwadwwlnd.supabase.co
     steps:
-      - name: Ping FocusForge API (Fly)
+      - name: Ping FocusSmith API (Fly)
         run: curl -fsS -m 60 --retry 3 --retry-delay 10 https://focusforge-api.fly.dev/health
 
       - name: Query the Supabase database

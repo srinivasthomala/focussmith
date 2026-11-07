@@ -1,7 +1,7 @@
-// Shared FocusForge settings for the popup, options page and service worker.
+// Shared FocusSmith settings for the popup, options page and service worker.
 // eslint-disable-next-line no-unused-vars
-const FOCUSFORGE_WEB_URL = 'https://focusforge-iota.vercel.app';
+const FOCUSSMITH_WEB_URL = 'https://focussmith.com';
 // eslint-disable-next-line no-unused-vars
-const FOCUSFORGE_PRESETS = [15, 25, 45, 60, 90];
+const FOCUSSMITH_PRESETS = [15, 25, 45, 60, 90];
 // eslint-disable-next-line no-unused-vars
-const FOCUSFORGE_MAX_MINUTES = 240;
+const FOCUSSMITH_MAX_MINUTES = 240;

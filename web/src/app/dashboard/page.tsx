@@ -158,7 +158,7 @@ export default function Dashboard() {
           <div className="mb-8 rounded-lg border border-primary/30 bg-primary/5 p-4">
             <div className="font-medium">Connect the browser extension to start tracking</div>
             <p className="text-sm text-muted-foreground mt-1">
-              Your dashboard stays empty until the FocusForge extension is linked to your
+              Your dashboard stays empty until the FocusSmith extension is linked to your
               account. Generate an API key and paste it into the extension&apos;s options.
             </p>
             <Link

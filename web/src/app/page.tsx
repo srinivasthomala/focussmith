@@ -27,19 +27,19 @@ const features = [
   },
   {
     title: 'Private by design',
-    body: 'FocusForge does not record your browsing history. It only saves your session times and the blocked sites you tried to open.',
+    body: 'FocusSmith does not record your browsing history. It only saves your session times and the blocked sites you tried to open.',
   },
 ];
 
 const steps = [
-  { n: '1', title: 'Add the extension', body: 'Install FocusForge in Chrome. It opens a short setup page.' },
+  { n: '1', title: 'Add the extension', body: 'Install FocusSmith in Chrome. It opens a short setup page.' },
   { n: '2', title: 'Create a free account', body: 'Sign up with email or Google, then connect the extension with one key.' },
   { n: '3', title: 'Start a session', body: 'Pick a length and work. Blocked sites stay closed until the timer ends.' },
 ];
 
 const faqs = [
   {
-    q: 'Is FocusForge free?',
+    q: 'Is FocusSmith free?',
     a: 'Yes. The timer, blocking, dashboard and daily summary are free. The Focus Coach is free for 5 questions a day.',
   },
   {
@@ -69,7 +69,7 @@ function PopupMockup() {
     <div className="w-[300px] rounded-xl border border-border bg-[#0f172a] p-5 shadow-2xl shadow-black/50">
       <div className="mb-4 flex items-baseline justify-between">
         <span className="bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-lg font-bold text-transparent">
-          FocusForge
+          FocusSmith
         </span>
         <span className="text-[11px] text-slate-400">Forge your focus</span>
       </div>
@@ -158,7 +158,7 @@ export default async function Home({ searchParams }: { searchParams: { deleted?:
               Block distractions. <span className="text-primary">Focus longer.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-              FocusForge blocks the sites that pull you away while you work, tracks your focus time, and gives
+              FocusSmith blocks the sites that pull you away while you work, tracks your focus time, and gives
               you a coach that answers questions about your own habits.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -182,7 +182,7 @@ export default async function Home({ searchParams }: { searchParams: { deleted?:
             <div className="mx-auto mt-14 max-w-5xl overflow-hidden rounded-xl border border-border shadow-2xl shadow-black/60">
               <Image
                 src="/screenshots/dashboard.png"
-                alt="FocusForge dashboard showing today's focus time, distractions and a weekly chart"
+                alt="FocusSmith dashboard showing today's focus time, distractions and a weekly chart"
                 width={2271}
                 height={1331}
                 priority

@@ -1,4 +1,4 @@
-# FocusForge
+# FocusSmith
 
 > **AI-powered focus and productivity SaaS for developers and creators.**
 > Block distracting sites with a Chrome extension, track focus sessions, get Claude-generated insights, and ask a Claude-powered Focus Coach agent about your data. It can even change your blocklist, with your confirmation.
@@ -15,14 +15,14 @@
   <img alt="Claude" src="https://img.shields.io/badge/AI-Anthropic%20Claude-D97757" />
 </p>
 
-**🌐 Live demo:** [focusforge-iota.vercel.app](https://focusforge-iota.vercel.app) &nbsp;·&nbsp; **🧩 Chrome extension:** [download the latest release](https://github.com/srinivasthomala/focusforge/releases/latest) &nbsp;·&nbsp; **📚 API docs:** [focusforge-api.fly.dev/docs](https://focusforge-api.fly.dev/docs)
+**🌐 Live demo:** [focussmith.com](https://focussmith.com) &nbsp;·&nbsp; **🧩 Chrome extension:** [download the latest release](https://github.com/srinivasthomala/focusforge/releases/latest) &nbsp;·&nbsp; **📚 API docs:** [focusforge-api.fly.dev/docs](https://focusforge-api.fly.dev/docs)
 
 ---
 
 ## Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/dashboard.png" alt="FocusForge dashboard" width="100%" />
+  <img src="docs/screenshots/dashboard.png" alt="FocusSmith dashboard" width="100%" />
 </p>
 
 <p align="center">

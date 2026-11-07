@@ -86,7 +86,7 @@ export default function Login() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center">
             <Link href="/" className="text-xl font-bold text-primary">
-              FocusForge
+              FocusSmith
             </Link>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function Login() {
             <CardTitle>{mode === 'signin' ? 'Sign in' : 'Create your account'}</CardTitle>
             <CardDescription>
               {mode === 'signin'
-                ? 'Sign in to your FocusForge dashboard.'
+                ? 'Sign in to your FocusSmith dashboard.'
                 : 'Sign up to start tracking your focus.'}
             </CardDescription>
           </CardHeader>

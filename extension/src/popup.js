@@ -1,4 +1,4 @@
-// FocusForge Popup Script
+// FocusSmith Popup Script
 
 const $ = (id) => document.getElementById(id);
 
@@ -141,9 +141,9 @@ customInput.addEventListener('input', () => {
     selectMinutes(selectedMinutes);
     return;
   }
-  if (!Number.isInteger(value) || value < 1 || value > FOCUSFORGE_MAX_MINUTES) {
+  if (!Number.isInteger(value) || value < 1 || value > FOCUSSMITH_MAX_MINUTES) {
     document.querySelectorAll('.preset').forEach((b) => b.classList.remove('selected'));
-    durationError.textContent = `Pick a whole number from 1 to ${FOCUSFORGE_MAX_MINUTES}.`;
+    durationError.textContent = `Pick a whole number from 1 to ${FOCUSSMITH_MAX_MINUTES}.`;
     startBtn.disabled = true;
     return;
   }
@@ -224,7 +224,7 @@ function openTab(url) {
 
 $('dashboardLink').addEventListener('click', (e) => {
   e.preventDefault();
-  openTab(`${FOCUSFORGE_WEB_URL}/dashboard`);
+  openTab(`${FOCUSSMITH_WEB_URL}/dashboard`);
 });
 
 $('optionsLink').addEventListener('click', (e) => {
@@ -260,7 +260,7 @@ function renderBlocklist(list) {
   link.textContent = 'dashboard settings';
   link.addEventListener('click', (e) => {
     e.preventDefault();
-    openTab(`${FOCUSFORGE_WEB_URL}/settings`);
+    openTab(`${FOCUSSMITH_WEB_URL}/settings`);
   });
   empty.append(link, '.');
   blocklistContainer.appendChild(empty);

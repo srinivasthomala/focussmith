@@ -10,7 +10,7 @@ export async function SiteHeader() {
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="text-xl font-bold text-primary">
-          FocusForge
+          FocusSmith
         </Link>
         <nav className="flex items-center gap-5 text-sm">
           <Link href="/#features" className="hidden text-muted-foreground hover:text-foreground sm:inline">
@@ -51,7 +51,7 @@ export async function SiteFooter() {
     <footer className="border-t border-border/60">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div>
-          <span className="font-semibold text-foreground">FocusForge</span> · Built by Srinivas Thomala
+          <span className="font-semibold text-foreground">FocusSmith</span> · Built by Srinivas Thomala
         </div>
         <div className="flex flex-wrap gap-5">
           <Link href="/privacy" className="hover:text-foreground">Privacy</Link>

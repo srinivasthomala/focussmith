@@ -3,7 +3,7 @@
 Two credential types, both presented as ``Authorization: Bearer <token>``:
 
 - **Supabase JWT** — the web dashboard, after an interactive magic-link login.
-- **FocusForge API key** (prefixed ``ff_``) — the browser extension and any
+- **FocusSmith API key** (prefixed ``ff_``) — the browser extension and any
   other device/headless client.
 
 This is the API-first split: humans authenticate with a short-lived session JWT,

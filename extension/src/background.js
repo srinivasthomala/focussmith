@@ -1,6 +1,6 @@
-// FocusForge Background Service Worker
+// FocusSmith Background Service Worker
 
-importScripts('config.js'); // FOCUSFORGE_WEB_URL, FOCUSFORGE_MAX_MINUTES
+importScripts('config.js'); // FOCUSSMITH_WEB_URL, FOCUSSMITH_MAX_MINUTES
 
 // State management
 // Empty on purpose: nothing is blocked until the user adds sites in the
@@ -38,7 +38,7 @@ function getApiBaseUrl() {
 
 // Initialize extension
 chrome.runtime.onInstalled.addListener((details) => {
-  console.log('FocusForge installed');
+  console.log('FocusSmith installed');
 
   // First install: open the setup page so new users can connect their account.
   if (details.reason === 'install') {
@@ -187,8 +187,8 @@ async function handleMessage(request, sendResponse) {
 // Start a focus session
 async function startFocusSession(duration = 25) {
   const minutes = Number(duration);
-  if (!Number.isInteger(minutes) || minutes < 1 || minutes > FOCUSFORGE_MAX_MINUTES) {
-    throw new Error(`Pick a whole number of minutes from 1 to ${FOCUSFORGE_MAX_MINUTES}.`);
+  if (!Number.isInteger(minutes) || minutes < 1 || minutes > FOCUSSMITH_MAX_MINUTES) {
+    throw new Error(`Pick a whole number of minutes from 1 to ${FOCUSSMITH_MAX_MINUTES}.`);
   }
   if (focusSessionActive) {
     throw new Error('A focus session is already running.');
@@ -278,8 +278,8 @@ async function extendFocusSession(minutes = 5) {
     throw new Error('Extend by 1 to 60 minutes.');
   }
   const planned = (sessionEndTime - sessionStartTime) / 60000;
-  if (planned + extra > FOCUSFORGE_MAX_MINUTES) {
-    throw new Error(`Sessions can be at most ${FOCUSFORGE_MAX_MINUTES} minutes.`);
+  if (planned + extra > FOCUSSMITH_MAX_MINUTES) {
+    throw new Error(`Sessions can be at most ${FOCUSSMITH_MAX_MINUTES} minutes.`);
   }
   sessionEndTime += extra * 60 * 1000;
   chrome.alarms.create('endSession', { when: sessionEndTime });
@@ -310,7 +310,7 @@ function updateBadge() {
 function notifyComplete(minutes) {
   if (!chrome.notifications) return;
   const mins = Math.round(minutes);
-  chrome.notifications.create('focusforge-session-complete', {
+  chrome.notifications.create('focussmith-session-complete', {
     type: 'basic',
     iconUrl: chrome.runtime.getURL('icons/icon128.png'),
     title: 'Focus session complete',
@@ -321,8 +321,8 @@ function notifyComplete(minutes) {
 
 if (chrome.notifications) {
   chrome.notifications.onClicked.addListener((id) => {
-    if (id === 'focusforge-session-complete') {
-      chrome.tabs.create({ url: `${FOCUSFORGE_WEB_URL}/dashboard` });
+    if (id === 'focussmith-session-complete') {
+      chrome.tabs.create({ url: `${FOCUSSMITH_WEB_URL}/dashboard` });
       chrome.notifications.clear(id);
     }
   });
@@ -347,7 +347,7 @@ async function sendLogsToBackend() {
   const apiKey = await getApiKey();
   if (!apiKey) {
     // Keep logs queued until the user connects an account via the options page.
-    console.warn('FocusForge: no API key set. Open the extension options to connect your account.');
+    console.warn('FocusSmith: no API key set. Open the extension options to connect your account.');
     return;
   }
 
@@ -391,7 +391,7 @@ async function sendLogsToBackend() {
   }
 }
 
-// Read the saved FocusForge API key (set via the options page).
+// Read the saved FocusSmith API key (set via the options page).
 function getApiKey() {
   return new Promise((resolve) => {
     chrome.storage.local.get(['apiKey'], (result) => resolve(result.apiKey || ''));

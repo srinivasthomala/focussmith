@@ -14,8 +14,8 @@ async def lifespan(_app: FastAPI):
 
 
 app = FastAPI(
-    title="FocusForge API",
-    description="Backend API for FocusForge productivity tool",
+    title="FocusSmith API",
+    description="Backend API for FocusSmith productivity tool",
     version="0.1.0",
     lifespan=lifespan,
 )
@@ -42,7 +42,7 @@ app.include_router(account.router)
 @app.get("/")
 def root():
     return {
-        "message": "FocusForge API",
+        "message": "FocusSmith API",
         "version": "0.1.0",
         "docs": "/docs",
     }

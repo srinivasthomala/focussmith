@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Seed a FocusForge account with a realistic week of activity — for demo
+"""Seed a FocusSmith account with a realistic week of activity — for demo
 screenshots. Posts backdated logs to the live API using an account's API key
 (the same ingest path the extension uses), so no DB access is needed.
 
 Usage:
     python scripts/seed_demo_data.py [--base-url URL] [--dry-run]
 
-It asks for the API key with a hidden prompt (or reads FOCUSFORGE_API_KEY),
+It asks for the API key with a hidden prompt (or reads FOCUSSMITH_API_KEY),
 so the key never appears on screen or in shell history.
 
 Get an API key from the web app: Settings -> API Keys -> Generate key.
@@ -156,7 +156,7 @@ def post_logs(base_url: str, api_key: str, logs: list[dict]) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Seed FocusForge with demo activity.")
+    parser = argparse.ArgumentParser(description="Seed FocusSmith with demo activity.")
     parser.add_argument("--base-url", default=DEFAULT_BASE_URL)
     parser.add_argument("--dry-run", action="store_true", help="Print the plan; don't post.")
     parser.add_argument("--seed", type=int, default=7, help="RNG seed for reproducibility.")
@@ -171,10 +171,10 @@ def main() -> None:
     if args.dry_run:
         print("\n(dry run: nothing posted)")
         return
-    api_key = os.environ.get("FOCUSFORGE_API_KEY") or getpass.getpass("\nPaste the demo account's API key (hidden): ")
+    api_key = os.environ.get("FOCUSSMITH_API_KEY") or getpass.getpass("\nPaste the demo account's API key (hidden): ")
     api_key = api_key.strip()
     if not api_key.startswith("ff_"):
-        raise SystemExit("That isn't a FocusForge key (they start with ff_).")
+        raise SystemExit("That isn't a FocusSmith key (they start with ff_).")
     print()
     set_blocklist(args.base_url, api_key)
     post_logs(args.base_url, api_key, logs)

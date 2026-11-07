@@ -2,15 +2,15 @@ import type { Metadata } from 'next';
 import { Contact, LegalPage } from '@/components/LegalPage';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | FocusForge',
-  description: 'What FocusForge collects, why, and how to delete it.',
+  title: 'Privacy Policy | FocusSmith',
+  description: 'What FocusSmith collects, why, and how to delete it.',
 };
 
 export default function Privacy() {
   return (
     <LegalPage title="Privacy Policy" updated="November 7, 2026">
       <p>
-        FocusForge is a focus timer and site blocker made of a Chrome extension, a web dashboard and an API. This
+        FocusSmith is a focus timer and site blocker made of a Chrome extension, a web dashboard and an API. This
         policy explains what data it collects, why, and the choices you have. The short version: we collect only
         what is needed to show you your own focus stats, we never sell it, and we never use it for ads.
       </p>
@@ -69,7 +69,7 @@ export default function Privacy() {
       </p>
 
       <h2>Who processes your data</h2>
-      <p>We use these service providers to run FocusForge:</p>
+      <p>We use these service providers to run FocusSmith:</p>
       <ul>
         <li>Supabase, for sign-in.</li>
         <li>Neon, for the database.</li>
@@ -81,7 +81,7 @@ export default function Privacy() {
 
       <h2>Chrome Web Store Limited Use</h2>
       <p>
-        FocusForge&apos;s use of information received from the Chrome extension follows the Chrome Web Store User
+        FocusSmith&apos;s use of information received from the Chrome extension follows the Chrome Web Store User
         Data Policy, including the Limited Use requirements. Data is used only to provide the features described
         above, is not transferred except as needed to provide them, and is never used for advertising or credit
         decisions.
@@ -113,7 +113,7 @@ export default function Privacy() {
       </p>
 
       <h2>Children</h2>
-      <p>FocusForge is not meant for children under 13, and we do not knowingly collect their data.</p>
+      <p>FocusSmith is not meant for children under 13, and we do not knowingly collect their data.</p>
 
       <h2>Changes</h2>
       <p>

@@ -1,4 +1,4 @@
-# Fly.io config for the FocusForge API.
+# Fly.io config for the FocusSmith API.
 # Deploy from this directory with:  fly deploy
 # First time:  fly launch --no-deploy  (or `fly apps create focusforge-api`)
 #

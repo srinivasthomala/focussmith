@@ -1,5 +1,5 @@
 // Blocked page: link to the dashboard, and match the heading to the blocking mode.
-document.getElementById('dashboardLink').href = `${FOCUSFORGE_WEB_URL}/dashboard`;
+document.getElementById('dashboardLink').href = `${FOCUSSMITH_WEB_URL}/dashboard`;
 
 chrome.storage.local.get(['focusSessionActive', 'blockingMode'], (state) => {
   if (!state.focusSessionActive && state.blockingMode === 'always') {

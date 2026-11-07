@@ -1,4 +1,4 @@
-# Local PostgreSQL for FocusForge API development.
+# Local PostgreSQL for FocusSmith API development.
 # From this directory: docker compose up -d
 # Then: copy .env.example to .env (or set DATABASE_URL) and run the API.
 services:

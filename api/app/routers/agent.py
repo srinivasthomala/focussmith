@@ -29,7 +29,7 @@ from app.timezones import day_range_utc, get_user_timezone, local_today
 router = APIRouter(prefix="/agent", tags=["agent"])
 logger = logging.getLogger(__name__)
 
-SYSTEM_PROMPT = """You are the FocusForge focus coach inside the user's dashboard. FocusForge is a \
+SYSTEM_PROMPT = """You are the FocusSmith focus coach inside the user's dashboard. FocusSmith is a \
 Chrome extension plus dashboard that tracks focus sessions and blocks distracting sites.
 
 You help with exactly two things: answering questions about this user's own focus data, and \

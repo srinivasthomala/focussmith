@@ -84,7 +84,7 @@ class AIGenerationEvent(Base):
 
 
 class ApiKey(Base):
-    """A per-user FocusForge API key. The extension (and any device client)
+    """A per-user FocusSmith API key. The extension (and any device client)
     authenticates with this instead of an interactive Supabase login. Only the
     SHA-256 hash is stored; the raw key is shown to the user exactly once."""
 

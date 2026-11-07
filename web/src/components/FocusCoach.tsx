@@ -34,7 +34,7 @@ async function errorDetail(res: Response, fallback: string) {
   return fallback;
 }
 
-/** Chat with the FocusForge agent. Changes it proposes need a Confirm click. */
+/** Chat with the FocusSmith agent. Changes it proposes need a Confirm click. */
 export function FocusCoach() {
   const [turns, setTurns] = useState<Turn[]>([]);
   const [input, setInput] = useState('');

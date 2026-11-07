@@ -3,16 +3,16 @@ import Link from 'next/link';
 import { Contact, LegalPage } from '@/components/LegalPage';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | FocusForge',
-  description: 'The terms for using FocusForge.',
+  title: 'Terms of Service | FocusSmith',
+  description: 'The terms for using FocusSmith.',
 };
 
 export default function Terms() {
   return (
     <LegalPage title="Terms of Service" updated="November 7, 2026">
       <p>
-        These terms apply to the FocusForge Chrome extension, website and API (together, &quot;FocusForge&quot;).
-        By using FocusForge you agree to them.
+        These terms apply to the FocusSmith Chrome extension, website and API (together, &quot;FocusSmith&quot;).
+        By using FocusSmith you agree to them.
       </p>
 
       <h2>Your account</h2>
@@ -23,14 +23,14 @@ export default function Terms() {
 
       <h2>Fair use</h2>
       <ul>
-        <li>Use FocusForge only for its purpose: managing your own focus.</li>
+        <li>Use FocusSmith only for its purpose: managing your own focus.</li>
         <li>Do not try to access other people&apos;s data, overload the service, or get around usage limits.</li>
         <li>Do not use the Focus Coach to generate harmful or illegal content.</li>
       </ul>
 
       <h2>Free features and limits</h2>
       <p>
-        FocusForge is free to use. Some features, such as the Focus Coach and AI summaries, have daily limits. We
+        FocusSmith is free to use. Some features, such as the Focus Coach and AI summaries, have daily limits. We
         may offer paid plans with higher limits in the future; any paid plan will show its price before you pay.
       </p>
 
@@ -48,25 +48,25 @@ export default function Terms() {
 
       <h2>Open source</h2>
       <p>
-        The FocusForge code is available under the MIT license. That license covers the code; these terms cover the
+        The FocusSmith code is available under the MIT license. That license covers the code; these terms cover the
         hosted service.
       </p>
 
       <h2>No warranty</h2>
       <p>
-        FocusForge is provided &quot;as is&quot;, without warranties of any kind. We work to keep it running and
+        FocusSmith is provided &quot;as is&quot;, without warranties of any kind. We work to keep it running and
         accurate, but we cannot promise it will always be available or free of errors.
       </p>
 
       <h2>Limitation of liability</h2>
       <p>
         To the extent the law allows, we are not liable for indirect or consequential losses arising from your use
-        of FocusForge.
+        of FocusSmith.
       </p>
 
       <h2>Ending your use</h2>
       <p>
-        You can stop using FocusForge and delete your account at any time from Settings. We may suspend accounts that
+        You can stop using FocusSmith and delete your account at any time from Settings. We may suspend accounts that
         break these terms.
       </p>
 

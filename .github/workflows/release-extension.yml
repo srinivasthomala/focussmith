@@ -22,7 +22,7 @@ jobs:
         # requires), excluding dev notes and Chrome's generated ruleset cache.
         run: |
           cd extension
-          zip -r "../focusforge-extension-${GITHUB_REF_NAME}.zip" . \
+          zip -r "../focussmith-extension-${GITHUB_REF_NAME}.zip" . \
             -x '_metadata/*' 'EXTENSION_NOTES.md' 'icons/README.md' '*/.DS_Store'
 
       - name: Create GitHub Release
@@ -30,6 +30,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "${GITHUB_REF_NAME}" \
-            "focusforge-extension-${GITHUB_REF_NAME}.zip" \
-            --title "FocusForge ${GITHUB_REF_NAME}" \
+            "focussmith-extension-${GITHUB_REF_NAME}.zip" \
+            --title "FocusSmith ${GITHUB_REF_NAME}" \
             --generate-notes

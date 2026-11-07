@@ -1,6 +1,6 @@
-"""Generate FocusForge Chrome extension icons.
+"""Generate FocusSmith Chrome extension icons.
 
-Renders a teal rounded-square with a bold "FF" wordmark at the three sizes
+Renders a teal rounded-square with a bold "FS" wordmark at the three sizes
 the MV3 manifest expects. Run from the repo root:
 
     python scripts/generate_icons.py
@@ -48,7 +48,7 @@ def make_icon(size: int) -> Image.Image:
     radius = max(2, size // 6)
     draw.rounded_rectangle((0, 0, size - 1, size - 1), radius=radius, fill=TEAL)
 
-    text = "FF" if size >= 32 else "F"
+    text = "FS" if size >= 32 else "F"
     font = load_font(int(size * 0.6))
     bbox = draw.textbbox((0, 0), text, font=font)
     tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]

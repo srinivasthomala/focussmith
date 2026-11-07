@@ -1,8 +1,8 @@
-# FocusForge Setup Guide
+# FocusSmith Setup Guide
 
-How to run the full FocusForge stack (PostgreSQL, FastAPI, Next.js, Chrome extension) on your machine, plus how the production deployment is wired.
+How to run the full FocusSmith stack (PostgreSQL, FastAPI, Next.js, Chrome extension) on your machine, plus how the production deployment is wired.
 
-> Just want to try it? Use the **[live demo](https://focusforge-iota.vercel.app)** and the **[packaged extension](https://github.com/srinivasthomala/focusforge/releases/latest)**. No local setup needed.
+> Just want to try it? Use the **[live demo](https://focussmith.com)** and the **[packaged extension](https://github.com/srinivasthomala/focusforge/releases/latest)**. No local setup needed.
 
 ## Prerequisites
 
@@ -58,7 +58,7 @@ Open `http://localhost:3000`, sign up on the login page, and you'll land on the 
 ## Step 4: Load and connect the Chrome extension
 
 1. Go to `chrome://extensions/`, enable **Developer mode**, click **Load unpacked**, and select the `extension/` folder.
-2. **Point it at your local API.** The extension targets the production API by default. On `chrome://extensions/`, open the FocusForge **service worker** inspector and run:
+2. **Point it at your local API.** The extension targets the production API by default. On `chrome://extensions/`, open the FocusSmith **service worker** inspector and run:
    ```js
    chrome.storage.local.set({ apiBaseUrl: 'http://localhost:8000' })
    ```

@@ -1,4 +1,4 @@
-# FocusForge API — production image for Fly.io (or any container host).
+# FocusSmith API — production image for Fly.io (or any container host).
 FROM python:3.12-slim
 
 # Keep Python lean and unbuffered for clean container logs.

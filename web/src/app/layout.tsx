@@ -5,17 +5,17 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 const description =
-  'FocusForge blocks distracting sites during focus sessions of any length, tracks your focus time and gives you an AI coach. Free Chrome extension.';
+  'FocusSmith blocks distracting sites during focus sessions of any length, tracks your focus time and gives you an AI coach. Free Chrome extension.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://focusforge-iota.vercel.app'),
-  title: 'FocusForge: block distractions, focus longer',
+  metadataBase: new URL('https://focussmith.com'),
+  title: 'FocusSmith: block distractions, focus longer',
   description,
   openGraph: {
-    title: 'FocusForge: block distractions, focus longer',
+    title: 'FocusSmith: block distractions, focus longer',
     description,
     url: '/',
-    siteName: 'FocusForge',
+    siteName: 'FocusSmith',
     images: [{ url: '/screenshots/dashboard.png', width: 2271, height: 1331 }],
     type: 'website',
   },

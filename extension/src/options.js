@@ -1,5 +1,5 @@
-// FocusForge setup: save and check the API key that connects this extension
-// to the user's FocusForge account.
+// FocusSmith setup: save and check the API key that connects this extension
+// to the user's FocusSmith account.
 
 const input = document.getElementById('apiKey');
 const status = document.getElementById('status');
@@ -7,7 +7,7 @@ const saveBtn = document.getElementById('save');
 
 // Links to the web app (get a key, dashboard, privacy).
 document.querySelectorAll('.web-link').forEach((link) => {
-  link.href = `${FOCUSFORGE_WEB_URL}${link.dataset.path}`;
+  link.href = `${FOCUSSMITH_WEB_URL}${link.dataset.path}`;
   link.target = '_blank';
   link.rel = 'noopener';
 });
@@ -49,7 +49,7 @@ chrome.storage.local.get(['apiKey'], async (result) => {
   input.value = result.apiKey;
   showStatus('Checking connection...', 'muted');
   const state = await checkKey(result.apiKey);
-  if (state === 'ok') showStatus('Connected to your FocusForge account.', 'ok');
+  if (state === 'ok') showStatus('Connected to your FocusSmith account.', 'ok');
   else if (state === 'invalid') showStatus('This key no longer works. Generate a new one and paste it here.', 'err');
   else showStatus('Saved, but the server could not be reached. It will retry automatically.', 'muted');
 });
@@ -62,7 +62,7 @@ async function save() {
     return;
   }
   if (!apiKey.startsWith('ff_')) {
-    showStatus('That is not a FocusForge key. Keys start with "ff_".', 'err');
+    showStatus('That is not a FocusSmith key. Keys start with "ff_".', 'err');
     return;
   }
 

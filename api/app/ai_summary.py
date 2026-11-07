@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 FALLBACK_MODEL = "deterministic-fallback"
 
 SYSTEM_PROMPT = (
-    "You are FocusForge, an encouraging productivity coach. Given a user's "
+    "You are FocusSmith, an encouraging productivity coach. Given a user's "
     "focus stats for a single day, write a short summary (2-3 sentences, plain "
     "text, no markdown or bullet points) that reflects the numbers back to them "
     "and offers one specific, actionable nudge. Reference the actual figures. "
@@ -57,7 +57,7 @@ def build_deterministic_summary(stats: DailyStats) -> str:
     """A respectable, zero-cost summary used as the fallback everywhere."""
     if stats.entry_count == 0:
         return (
-            "No activity tracked yet today. Start a focus session and FocusForge "
+            "No activity tracked yet today. Start a focus session and FocusSmith "
             "will begin charting your progress!"
         )
 
