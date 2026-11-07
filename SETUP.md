@@ -2,7 +2,7 @@
 
 How to run the full FocusSmith stack (PostgreSQL, FastAPI, Next.js, Chrome extension) on your machine, plus how the production deployment is wired.
 
-> Just want to try it? Use the **[live demo](https://focussmith.com)** and the **[packaged extension](https://github.com/srinivasthomala/focusforge/releases/latest)**. No local setup needed.
+> Just want to try it? Use the **[live demo](https://focussmith.com)** and the **[packaged extension](https://github.com/srinivasthomala/focussmith/releases/latest)**. No local setup needed.
 
 ## Prerequisites
 
@@ -63,7 +63,7 @@ Open `http://localhost:3000`, sign up on the login page, and you'll land on the 
    chrome.storage.local.set({ apiBaseUrl: 'http://localhost:8000' })
    ```
    (Run `chrome.storage.local.remove('apiBaseUrl')` to switch back to production.)
-3. In the web app, go to **Settings → API Keys** and generate a key (starts with `ff_`).
+3. In the web app, go to **Settings → API Keys** and generate a key (starts with `fs_`).
 4. Open the extension's **Options** page, paste the key, and save.
 
 The extension authenticates with that API key. Dashboard users authenticate with Supabase. Both resolve to the same user on the backend.
@@ -141,8 +141,8 @@ fly tokens create deploy -a focusforge-api
 `scripts/seed_demo_data.py` posts a realistic backdated week of activity through the same `/logs` endpoint the extension uses:
 
 ```bash
-python scripts/seed_demo_data.py --api-key ff_xxx --base-url http://localhost:8000
-python scripts/seed_demo_data.py --api-key ff_xxx --dry-run   # preview without posting
+python scripts/seed_demo_data.py --base-url http://localhost:8000
+python scripts/seed_demo_data.py --dry-run   # preview without posting
 ```
 
 Omit `--base-url` to target the production API.

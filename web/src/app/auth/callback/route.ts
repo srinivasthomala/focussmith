@@ -7,7 +7,7 @@ import { safeNextPath } from '@/lib/next-path';
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get('code');
-  const cookieNext = cookies().get('ff_next')?.value;
+  const cookieNext = cookies().get('fs_next')?.value;
   const next = safeNextPath(searchParams.get('next') ?? (cookieNext ? decodeURIComponent(cookieNext) : null));
 
   if (code) {
@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
       const response = NextResponse.redirect(`${origin}${next}`);
-      response.cookies.delete('ff_next');
+      response.cookies.delete('fs_next');
       return response;
     }
   }

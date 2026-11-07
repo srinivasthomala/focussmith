@@ -56,7 +56,7 @@ jobs:
         # The machine scales to zero, so the first request may cold start.
         run: |
           for i in 1 2 3 4 5; do
-            if curl -fsS -m 30 https://focusforge-api.fly.dev/health; then
+            if curl -fsS -m 30 https://api.focussmith.com/health; then
               echo "API healthy"
               exit 0
             fi

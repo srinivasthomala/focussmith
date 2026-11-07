@@ -3,7 +3,7 @@
 Two credential types, both presented as ``Authorization: Bearer <token>``:
 
 - **Supabase JWT** — the web dashboard, after an interactive magic-link login.
-- **FocusSmith API key** (prefixed ``ff_``) — the browser extension and any
+- **FocusSmith API key** (prefixed ``fs_``; older keys use ``ff_``) — the browser extension and any
   other device/headless client.
 
 This is the API-first split: humans authenticate with a short-lived session JWT,
@@ -28,7 +28,9 @@ from app.database import get_db
 LAST_USED_WRITE_INTERVAL = timedelta(minutes=5)
 from app.db_models import ApiKey
 
-API_KEY_PREFIX = "ff_"
+API_KEY_PREFIX = "fs_"
+# Keys made before the FocusSmith rename start with ff_ and keep working.
+API_KEY_PREFIXES = ("fs_", "ff_")
 _SUPABASE_AUDIENCE = "authenticated"
 
 
@@ -46,7 +48,7 @@ def generate_api_key() -> tuple[str, str, str]:
 
 
 def _user_from_api_key(token: str, db: Session) -> str | None:
-    if not token.startswith(API_KEY_PREFIX):
+    if not token.startswith(API_KEY_PREFIXES):
         return None
     row = db.scalars(
         select(ApiKey).where(ApiKey.key_hash == hash_api_key(token))
@@ -124,7 +126,7 @@ def get_current_web_user(authorization: str | None = Header(default=None)) -> st
             detail="Missing or malformed Authorization header.",
         )
     token = authorization.split(" ", 1)[1].strip()
-    user_id = None if token.startswith(API_KEY_PREFIX) else _user_from_jwt(token)
+    user_id = None if token.startswith(API_KEY_PREFIXES) else _user_from_jwt(token)
     if not user_id:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

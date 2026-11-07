@@ -4,7 +4,7 @@
 > Block distracting sites with a Chrome extension, track focus sessions, get Claude-generated insights, and ask a Claude-powered Focus Coach agent about your data. It can even change your blocklist, with your confirmation.
 
 <p align="left">
-  <a href="https://github.com/srinivasthomala/focusforge/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/srinivasthomala/focusforge/actions/workflows/ci.yml/badge.svg" /></a>
+  <a href="https://github.com/srinivasthomala/focussmith/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/srinivasthomala/focussmith/actions/workflows/ci.yml/badge.svg" /></a>
   <img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg" />
   <img alt="Next.js" src="https://img.shields.io/badge/Next.js-14-black?logo=next.js" />
   <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white" />
@@ -15,7 +15,7 @@
   <img alt="Claude" src="https://img.shields.io/badge/AI-Anthropic%20Claude-D97757" />
 </p>
 
-**🌐 Live demo:** [focussmith.com](https://focussmith.com) &nbsp;·&nbsp; **🧩 Chrome extension:** [download the latest release](https://github.com/srinivasthomala/focusforge/releases/latest) &nbsp;·&nbsp; **📚 API docs:** [focusforge-api.fly.dev/docs](https://focusforge-api.fly.dev/docs)
+**🌐 Live demo:** [focussmith.com](https://focussmith.com) &nbsp;·&nbsp; **🧩 Chrome extension:** [download the latest release](https://github.com/srinivasthomala/focussmith/releases/latest) &nbsp;·&nbsp; **📚 API docs:** [focusforge-api.fly.dev/docs](https://api.focussmith.com/docs)
 
 ---
 

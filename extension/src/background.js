@@ -24,7 +24,7 @@ const SETTINGS_STALE_MS = 30000;
 
 // Production API endpoint. End users only provide their API key; the URL is
 // fixed. For local development, set `apiBaseUrl` in chrome.storage to override.
-const DEFAULT_API_BASE_URL = 'https://focusforge-api.fly.dev';
+const DEFAULT_API_BASE_URL = 'https://api.focussmith.com';
 
 // Resolve the API base URL — the production default unless a dev override is set.
 function getApiBaseUrl() {

@@ -10,7 +10,7 @@
     "notifications"
   ],
   "host_permissions": [
-    "https://focusforge-api.fly.dev/*",
+    "https://api.focussmith.com/*",
     "http://localhost:8000/*"
   ],
   "icons": {

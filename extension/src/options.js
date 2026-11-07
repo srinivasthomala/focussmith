@@ -21,7 +21,7 @@ function getApiBaseUrl() {
   return new Promise((resolve) => {
     chrome.storage.local.get(['apiBaseUrl'], (result) => {
       const url = (result.apiBaseUrl || '').trim().replace(/\/+$/, '');
-      resolve(url || 'https://focusforge-api.fly.dev');
+      resolve(url || 'https://api.focussmith.com');
     });
   });
 }
@@ -61,8 +61,9 @@ async function save() {
     chrome.storage.local.set({ apiKey: '' }, () => showStatus('Key removed. This extension is disconnected.', 'muted'));
     return;
   }
-  if (!apiKey.startsWith('ff_')) {
-    showStatus('That is not a FocusSmith key. Keys start with "ff_".', 'err');
+  // fs_ since the FocusSmith rename; older ff_ keys still work.
+  if (!apiKey.startsWith('fs_') && !apiKey.startsWith('ff_')) {
+    showStatus('That is not a FocusSmith key. Keys start with "fs_".', 'err');
     return;
   }
 

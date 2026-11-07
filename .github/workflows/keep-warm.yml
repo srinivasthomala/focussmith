@@ -32,7 +32,7 @@ jobs:
       SUPABASE_URL: https://egqjlomtqsynwadwwlnd.supabase.co
     steps:
       - name: Ping FocusSmith API (Fly)
-        run: curl -fsS -m 60 --retry 3 --retry-delay 10 https://focusforge-api.fly.dev/health
+        run: curl -fsS -m 60 --retry 3 --retry-delay 10 https://api.focussmith.com/health
 
       - name: Query the Supabase database
         # Session pooler URL (IPv4). The direct db.* host is IPv6-only and

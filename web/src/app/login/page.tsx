@@ -68,7 +68,7 @@ export default function Login() {
     const supabase = createClient();
     // The callback URL must match Supabase's allowlist exactly, so the return
     // path travels in a short-lived cookie instead of a query parameter.
-    document.cookie = `ff_next=${encodeURIComponent(next)}; path=/; max-age=600; samesite=lax`;
+    document.cookie = `fs_next=${encodeURIComponent(next)}; path=/; max-age=600; samesite=lax`;
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo: `${window.location.origin}/auth/callback` },

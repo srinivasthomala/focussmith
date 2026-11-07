@@ -24,7 +24,7 @@ def _seed(db):
                            domain="system", minutes_active=25, is_focus_session=True,
                            is_distraction_attempt=False))
         db.add(UserSettings(user_id=user, blocklist=json.dumps(["reddit.com"]), blocking_mode="focus-only"))
-        db.add(ApiKey(user_id=user, label="laptop", key_hash=f"hash-{user}", prefix="ff_abc"))
+        db.add(ApiKey(user_id=user, label="laptop", key_hash=f"hash-{user}", prefix="fs_abc"))
     db.commit()
 
 

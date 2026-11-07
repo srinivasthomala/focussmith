@@ -23,7 +23,7 @@ import random
 import urllib.request
 from datetime import datetime, time, timedelta, timezone
 
-DEFAULT_BASE_URL = "https://focusforge-api.fly.dev"
+DEFAULT_BASE_URL = "https://api.focussmith.com"
 DISTRACTORS = ["youtube.com", "x.com", "reddit.com", "instagram.com"]
 BLOCKLIST = ["youtube.com", "x.com", "reddit.com", "instagram.com", "netflix.com"]
 
@@ -173,8 +173,8 @@ def main() -> None:
         return
     api_key = os.environ.get("FOCUSSMITH_API_KEY") or getpass.getpass("\nPaste the demo account's API key (hidden): ")
     api_key = api_key.strip()
-    if not api_key.startswith("ff_"):
-        raise SystemExit("That isn't a FocusSmith key (they start with ff_).")
+    if not api_key.startswith(("fs_", "ff_")):
+        raise SystemExit("That isn't a FocusSmith key (they start with fs_).")
     print()
     set_blocklist(args.base_url, api_key)
     post_logs(args.base_url, api_key, logs)
