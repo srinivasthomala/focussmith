@@ -5,6 +5,14 @@ import { safeNextPath } from '@/lib/next-path';
 const PROTECTED = ['/dashboard', '/settings'];
 
 export async function middleware(request: NextRequest) {
+  // Supabase sends sign-ins back to the Site URL (the home page) when the
+  // callback address isn't on its allow list. Finish the sign-in anyway.
+  if (request.nextUrl.pathname === '/' && request.nextUrl.searchParams.has('code')) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/auth/callback';
+    return NextResponse.redirect(url);
+  }
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -51,5 +59,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/settings/:path*', '/login'],
+  matcher: ['/', '/dashboard/:path*', '/settings/:path*', '/login'],
 };
