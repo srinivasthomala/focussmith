@@ -40,6 +40,23 @@ async function checkKey(apiKey) {
   }
 }
 
+// The email of the account a key belongs to ('' when unknown).
+async function accountEmail(apiKey) {
+  try {
+    const response = await fetch(`${await getApiBaseUrl()}/me`, {
+      headers: { Authorization: `Bearer ${apiKey}` },
+    });
+    if (!response.ok) return '';
+    return (await response.json()).email || '';
+  } catch (error) {
+    return '';
+  }
+}
+
+function connectedMessage(email) {
+  return email ? `Connected as ${email}.` : 'Connected to your FocusSmith account.';
+}
+
 // Prefill with any saved key and show whether it is connected.
 chrome.storage.local.get(['apiKey'], async (result) => {
   if (!result.apiKey) {
@@ -49,7 +66,7 @@ chrome.storage.local.get(['apiKey'], async (result) => {
   input.value = result.apiKey;
   showStatus('Checking connection...', 'muted');
   const state = await checkKey(result.apiKey);
-  if (state === 'ok') showStatus('Connected to your FocusSmith account.', 'ok');
+  if (state === 'ok') showStatus(connectedMessage(await accountEmail(result.apiKey)), 'ok');
   else if (state === 'invalid') showStatus('This key no longer works. Generate a new one and paste it here.', 'err');
   else showStatus('Saved, but the server could not be reached. It will retry automatically.', 'muted');
 });
@@ -77,11 +94,12 @@ async function save() {
     return;
   }
 
+  const email = state === 'ok' ? await accountEmail(apiKey) : '';
   chrome.storage.local.set({ apiKey }, () => {
     // Pull settings and send any queued sessions right away.
     chrome.runtime.sendMessage({ action: 'syncNow' }, () => void chrome.runtime.lastError);
     if (state === 'ok') {
-      showStatus('Connected. Your blocked sites and sessions now sync with your dashboard.', 'ok');
+      showStatus(`${connectedMessage(email)} Your blocked sites and sessions now sync with your dashboard.`, 'ok');
     } else {
       showStatus('Saved, but the server could not be reached right now. It will retry automatically.', 'muted');
     }

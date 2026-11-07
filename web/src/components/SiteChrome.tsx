@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { EXTENSION_CTA, EXTENSION_URL, GITHUB_URL } from '@/lib/site';
+import { CONTACT_EMAIL, EXTENSION_CTA, EXTENSION_URL, GITHUB_URL } from '@/lib/site';
 import { isSignedIn } from '@/lib/supabase/user';
 
 // Header and footer for the public pages (landing, privacy, terms).
@@ -56,6 +56,9 @@ export async function SiteFooter() {
         <div className="flex flex-wrap gap-5">
           <Link href="/privacy" className="hover:text-foreground">Privacy</Link>
           <Link href="/terms" className="hover:text-foreground">Terms</Link>
+          <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-foreground">
+            Contact
+          </a>
           <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
             GitHub
           </a>

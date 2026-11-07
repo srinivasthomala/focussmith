@@ -160,6 +160,16 @@
     .blocking-now + .error { margin: -6px 0 10px; }
     .blocklist-empty a { color: #2dd4bf; }
 
+    .account {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #94a3b8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .account strong { color: #cbd5e1; font-weight: 600; }
+
     .footer {
       display: flex;
       justify-content: space-between;
@@ -249,6 +259,8 @@
     <div class="blocklist-title">Blocked sites</div>
     <div id="blocklistContainer"></div>
   </div>
+
+  <div id="accountLine" class="account hidden"></div>
 
   <div class="footer">
     <a href="#" id="dashboardLink">Open dashboard ↗</a>

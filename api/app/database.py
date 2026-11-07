@@ -49,3 +49,6 @@ def _add_missing_columns() -> None:
         conn.execute(
             text("ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS timezone VARCHAR(64)")
         )
+        conn.execute(
+            text("ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS email VARCHAR(320)")
+        )

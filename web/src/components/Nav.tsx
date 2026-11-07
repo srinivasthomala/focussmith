@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { authedFetch } from '@/lib/api';
 
 interface Account {
   email: string;
@@ -33,6 +34,9 @@ export function Nav() {
           avatarUrl: meta.avatar_url || meta.picture || null,
           provider: user.app_metadata?.provider || null,
         });
+        // Let the API record this account's email (from the verified token),
+        // so the extension can show which account it's connected to.
+        authedFetch('/api/me/sync', { method: 'POST' }).catch(() => {});
       })
       .catch(() => {});
   }, []);
@@ -133,14 +137,6 @@ export function Nav() {
                     </div>
                   </div>
                   <div className="my-1 border-t border-border" />
-                  <Link
-                    href="/settings"
-                    role="menuitem"
-                    onClick={() => setMenuOpen(false)}
-                    className="block rounded-md px-2 py-2 text-sm hover:bg-secondary"
-                  >
-                    Settings
-                  </Link>
                   <button
                     role="menuitem"
                     onClick={signOut}

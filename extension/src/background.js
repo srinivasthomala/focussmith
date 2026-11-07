@@ -155,6 +155,7 @@ async function handleMessage(request, sendResponse) {
         lastDuration,
         lastCompleted: recentCompletion(),
         hasApiKey: Boolean(await getApiKey()),
+        accountEmail: await getAccountEmail(),
       });
       // Opportunistically refresh settings when the popup opens (non-blocking).
       fetchSettings();
@@ -168,6 +169,7 @@ async function handleMessage(request, sendResponse) {
       // Just connected from the setup page: pull settings, send queued logs.
       sendResponse({ success: true });
       fetchSettings();
+      refreshAccount(true);
       sendLogsToBackend();
     } else if (request.action === 'dismissCompleted') {
       lastCompleted = null;
@@ -425,10 +427,61 @@ async function fetchSettings() {
     lastSettingsSync = Date.now();
     await saveState();
     updateBlockingRules();
+    refreshAccount();
   } catch (error) {
     console.error('Error fetching settings:', error);
   }
 }
+
+// ---- Which account is connected ------------------------------------------------
+// The popup and setup page show "Connected as you@...". The email comes from
+// GET /me, which knows it once the user has opened their dashboard.
+
+const ACCOUNT_RECHECK_MS = 5 * 60 * 1000;
+let lastAccountCheck = 0;
+
+function getAccountEmail() {
+  return new Promise((resolve) => {
+    chrome.storage.local.get(['accountEmail'], (r) => resolve(r.accountEmail || ''));
+  });
+}
+
+function setAccountEmail(email) {
+  return new Promise((resolve) => chrome.storage.local.set({ accountEmail: email || '' }, resolve));
+}
+
+// Look the email up when it's unknown (throttled), or right away with force.
+async function refreshAccount(force = false) {
+  const apiKey = await getApiKey();
+  if (!apiKey) {
+    await setAccountEmail('');
+    return;
+  }
+  if (!force && ((await getAccountEmail()) || Date.now() - lastAccountCheck < ACCOUNT_RECHECK_MS)) {
+    return;
+  }
+  lastAccountCheck = Date.now();
+  try {
+    const response = await fetch(`${await getApiBaseUrl()}/me`, {
+      headers: { 'Authorization': `Bearer ${apiKey}` },
+    });
+    if (response.status === 401) {
+      await setAccountEmail('');
+    } else if (response.ok) {
+      const data = await response.json();
+      await setAccountEmail(data.email || '');
+    }
+  } catch (error) {
+    // Offline: keep what we had and try again later.
+  }
+}
+
+// A new or removed key means a different (or no) account.
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === 'local' && changes.apiKey) {
+    setAccountEmail('').then(() => refreshAccount(true));
+  }
+});
 
 // Switch between blocking only during sessions and blocking all the time.
 // With an account, the change is saved there (the dashboard is the source of

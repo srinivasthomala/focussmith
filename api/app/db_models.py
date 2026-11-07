@@ -118,6 +118,9 @@ class UserSettings(Base):
     )
     # IANA zone (e.g. "Asia/Kolkata") from the user's browser; NULL means UTC.
     timezone: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    # Sign-in email, copied from the verified token when the dashboard loads,
+    # so the extension can show which account its key belongs to.
+    email: Mapped[str | None] = mapped_column(String(320), nullable=True)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         server_default=func.now(),

@@ -58,10 +58,29 @@ function updateUI(status) {
   }
 
   $('connectBanner').style.display = status.hasApiKey ? 'none' : 'block';
+  renderAccount(status.hasApiKey, status.accountEmail);
   distractionCount.textContent = status.distractionAttempts || 0;
   renderBlocklist(status.blocklist);
   lastStatus = status;
   renderBlockingMode();
+}
+
+// ---- Connected account -------------------------------------------------------------
+
+function renderAccount(hasApiKey, email) {
+  const line = $('accountLine');
+  line.classList.toggle('hidden', !hasApiKey);
+  line.textContent = '';
+  if (!hasApiKey) return;
+  if (email) {
+    line.append('Connected as ');
+    const strong = document.createElement('strong');
+    strong.textContent = email;
+    line.append(strong);
+    line.title = `Connected as ${email}`;
+  } else {
+    line.textContent = 'Connected to your FocusSmith account';
+  }
 }
 
 // ---- Blocking mode ---------------------------------------------------------------
@@ -285,6 +304,9 @@ chrome.storage.onChanged.addListener((changes, area) => {
   }
   if (changes.apiKey) {
     $('connectBanner').style.display = changes.apiKey.newValue ? 'none' : 'block';
+  }
+  if (changes.accountEmail || changes.apiKey) {
+    chrome.storage.local.get(['apiKey', 'accountEmail'], (r) => renderAccount(Boolean(r.apiKey), r.accountEmail));
   }
 });
 

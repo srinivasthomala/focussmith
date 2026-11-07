@@ -83,6 +83,12 @@ def _get_jwks_client() -> jwt.PyJWKClient | None:
 
 
 def _user_from_jwt(token: str) -> str | None:
+    payload = _jwt_payload(token)
+    return payload.get("sub") if payload else None
+
+
+def _jwt_payload(token: str) -> dict | None:
+    """Verify a Supabase access token and return its claims, or None."""
     settings = get_settings()
     try:
         alg = jwt.get_unverified_header(token).get("alg")
@@ -111,14 +117,14 @@ def _user_from_jwt(token: str) -> str | None:
             return None
     except (jwt.PyJWTError, jwt.PyJWKClientError):
         return None
-    return payload.get("sub")
+    return payload if payload.get("sub") else None
 
 
-def get_current_web_user(authorization: str | None = Header(default=None)) -> str:
-    """Like ``get_current_user`` but accepts only a dashboard sign-in token.
+def get_current_web_claims(authorization: str | None = Header(default=None)) -> dict:
+    """The verified claims of a dashboard sign-in token (``sub``, ``email``...).
 
-    For actions that must never be possible with an extension key, such as
-    deleting the account: a leaked key should not be able to do that.
+    Accepts only a sign-in token, never an extension key: for actions such as
+    deleting the account, which a leaked key must not be able to do.
     """
     if not authorization or not authorization.lower().startswith("bearer "):
         raise HTTPException(
@@ -126,13 +132,18 @@ def get_current_web_user(authorization: str | None = Header(default=None)) -> st
             detail="Missing or malformed Authorization header.",
         )
     token = authorization.split(" ", 1)[1].strip()
-    user_id = None if token.startswith(API_KEY_PREFIXES) else _user_from_jwt(token)
-    if not user_id:
+    payload = None if token.startswith(API_KEY_PREFIXES) else _jwt_payload(token)
+    if not payload:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Sign in on the dashboard to do this.",
         )
-    return user_id
+    return payload
+
+
+def get_current_web_user(claims: dict = Depends(get_current_web_claims)) -> str:
+    """Like ``get_current_user`` but accepts only a dashboard sign-in token."""
+    return claims["sub"]
 
 
 def get_current_user(
