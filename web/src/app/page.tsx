@@ -243,6 +243,29 @@ export default async function Home({ searchParams }: { searchParams: { deleted?:
           </div>
         </section>
 
+        {/* Weekly chart */}
+        <section className="border-t border-border/60">
+          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 className="text-3xl font-bold sm:text-4xl">Your week at a glance</h2>
+              <p className="mt-4 text-muted-foreground">
+                Every session adds up. See your focus minutes for each day of the week, spot your strongest and
+                weakest days, and ask the Focus Coach why.
+              </p>
+            </div>
+            <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-xl border border-border shadow-2xl shadow-black/50">
+              <Image
+                src="/screenshots/weekly-chart.png"
+                alt="Weekly Focus chart showing focus minutes for each of the last 7 days"
+                width={2775}
+                height={855}
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="h-auto w-full"
+              />
+            </div>
+          </div>
+        </section>
+
         {/* How it works */}
         <section id="how" className="scroll-mt-20 border-t border-border/60">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
