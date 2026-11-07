@@ -371,3 +371,45 @@ def test_cannot_confirm_another_users_action(client, agent_env, db_session):
     db_session.commit()
     other = db_session.query(AgentPendingAction).filter_by(user_id="victim").one()
     assert client.post(f"/agent/actions/{other.id}/confirm").status_code == 404
+
+
+# -- history: the conversation survives a refresh -------------------------------
+def test_history_returns_todays_turns_with_action_status(client, agent_env, db_session):
+    assert client.get("/agent/history").json() == {"turns": []}
+
+    agent_env(reply("end_turn", text("You focused 2 hours today.")))
+    client.post("/agent/chat", json={"message": "How did today go?"})
+    action_id = _propose(client, agent_env)
+    client.post(f"/agent/actions/{action_id}/confirm")
+
+    turns = client.get("/agent/history").json()["turns"]
+    assert [t["question"] for t in turns] == ["How did today go?", "block reddit always"]
+    assert turns[0]["reply"] == "You focused 2 hours today." and turns[0]["pendingActions"] == []
+    assert turns[1]["pendingActions"][0]["id"] == action_id
+    assert turns[1]["pendingActions"][0]["status"] == "applied"
+
+
+def test_history_excludes_earlier_days_and_other_users(client, agent_env, db_session):
+    from datetime import datetime, timedelta, timezone
+
+    agent_env(reply("end_turn", text("today")))
+    client.post("/agent/chat", json={"message": "today?"})
+    db_session.add(AgentRun(user_id="test-user", status="ok", model="m", question="yesterday?", reply="old",
+                            created_at=datetime.now(timezone.utc) - timedelta(days=2)))
+    db_session.add(AgentRun(user_id="someone-else", status="ok", model="m", question="not yours", reply="x"))
+    db_session.commit()
+
+    turns = client.get("/agent/history").json()["turns"]
+    assert [t["question"] for t in turns] == ["today?"]
+
+
+def test_history_marks_unconfirmed_expired_actions(client, agent_env, db_session):
+    from datetime import datetime, timedelta, timezone
+
+    action_id = _propose(client, agent_env)
+    action = db_session.get(AgentPendingAction, action_id)
+    action.expires_at = datetime.now(timezone.utc) - timedelta(minutes=1)
+    db_session.commit()
+
+    turns = client.get("/agent/history").json()["turns"]
+    assert turns[0]["pendingActions"][0]["status"] == "expired"

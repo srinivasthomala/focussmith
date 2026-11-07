@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description,
     url: '/',
     siteName: 'FocusSmith',
-    images: [{ url: '/screenshots/dashboard.png', width: 2271, height: 1331 }],
+    images: [{ url: '/screenshots/dashboard.png', width: 2850, height: 3129 }],
     type: 'website',
   },
   twitter: { card: 'summary_large_image' },

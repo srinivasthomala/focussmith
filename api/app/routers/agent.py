@@ -236,6 +236,59 @@ def agent_chat(
     )
 
 
+class HistoryTurn(BaseModel):
+    question: str
+    reply: str | None
+    status: str
+    pendingActions: List[PendingActionOut]
+
+
+class HistoryResponse(BaseModel):
+    turns: List[HistoryTurn]
+
+
+@router.get("/history", response_model=HistoryResponse)
+def agent_history(
+    user_id: str = Depends(get_current_user),
+    db: Session = Depends(get_db),
+    tz: tzinfo = Depends(get_user_timezone),
+) -> HistoryResponse:
+    """Today's conversation (the user's local day), so it survives a page
+    refresh or switching pages. Resets at local midnight, like the quota."""
+    start, _ = day_range_utc(local_today(tz), local_today(tz), tz)
+    runs = db.scalars(
+        select(AgentRun)
+        .where(AgentRun.user_id == user_id, AgentRun.created_at >= start, AgentRun.reply.is_not(None))
+        .order_by(AgentRun.created_at, AgentRun.id)
+    ).all()
+    actions_by_run: dict[int, list[PendingActionOut]] = {}
+    if runs:
+        actions = db.scalars(
+            select(AgentPendingAction)
+            .where(
+                AgentPendingAction.user_id == user_id,
+                AgentPendingAction.run_id.in_([r.id for r in runs]),
+            )
+            .order_by(AgentPendingAction.id)
+        ).all()
+        for a in actions:
+            out = _action_out(a)
+            if a.status == "pending" and _expired(a):
+                out.status = "expired"
+            actions_by_run.setdefault(a.run_id, []).append(out)
+    return HistoryResponse(
+        turns=[
+            HistoryTurn(
+                question=r.question,
+                reply=r.reply,
+                status=r.status,
+                pendingActions=actions_by_run.get(r.id, []),
+            )
+            for r in runs
+        ]
+    )
+
+
 def _get_action(db: Session, user_id: str, action_id: int) -> AgentPendingAction:
     action = db.get(AgentPendingAction, action_id)
     if action is None or action.user_id != user_id:

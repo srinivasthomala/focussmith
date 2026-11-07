@@ -11,6 +11,13 @@ interface PendingAction {
   expiresAt: string;
 }
 
+interface HistoryTurn {
+  question: string;
+  reply: string | null;
+  status: string;
+  pendingActions: PendingAction[];
+}
+
 interface Turn {
   role: 'user' | 'assistant';
   text: string;
@@ -44,6 +51,34 @@ export function FocusCoach() {
   const [enabled, setEnabled] = useState(true);
   const [busyAction, setBusyAction] = useState<number | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  // Restored history shouldn't scroll the page; only new replies should.
+  const skipNextScroll = useRef(false);
+
+  // Bring back today's conversation, so a refresh or a trip to Settings
+  // doesn't lose it. It resets at local midnight, like the question quota.
+  useEffect(() => {
+    authedFetch('/api/agent/history')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((h: { turns: HistoryTurn[] } | null) => {
+        if (!h?.turns?.length) return;
+        const restored: Turn[] = h.turns.flatMap((t) => [
+          { role: 'user' as const, text: t.question },
+          {
+            role: 'assistant' as const,
+            text: t.reply || '',
+            actions: t.pendingActions,
+            isError: t.status === 'error',
+          },
+        ]);
+        // Don't overwrite a question asked while history was loading.
+        setTurns((current) => {
+          if (current.length) return current;
+          skipNextScroll.current = true;
+          return restored;
+        });
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     authedFetch('/api/agent/quota')
@@ -61,6 +96,10 @@ export function FocusCoach() {
   // nothing if it's already visible, so the page doesn't jump while reading.
   useEffect(() => {
     if (turns.length === 0) return;
+    if (skipNextScroll.current) {
+      skipNextScroll.current = false;
+      return;
+    }
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }, [turns]);
 
@@ -193,6 +232,8 @@ export function FocusCoach() {
                                 ? 'Applied. The extension picks it up within a minute.'
                                 : a.status === 'cancelled'
                                 ? 'Cancelled.'
+                                : a.status === 'expired'
+                                ? 'Expired before it was confirmed. Ask again to make this change.'
                                 : a.status}
                             </div>
                           )}

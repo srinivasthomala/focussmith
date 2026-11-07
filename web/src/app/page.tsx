@@ -154,7 +154,7 @@ export default async function Home({ searchParams }: { searchParams: { deleted?:
             <div className="mx-auto mb-6 w-fit rounded-full border border-primary/30 bg-primary/10 px-4 py-1 text-sm text-primary">
               Free Chrome extension with an AI focus coach
             </div>
-            <h1 className="mx-auto max-w-4xl text-4xl font-bold leading-tight tracking-tight sm:text-6xl">
+            <h1 className="mx-auto max-w-5xl text-4xl font-bold leading-tight tracking-tight sm:text-6xl">
               Block distractions. <span className="text-primary">Focus longer.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
@@ -179,15 +179,19 @@ export default async function Home({ searchParams }: { searchParams: { deleted?:
             </div>
             <p className="mt-4 text-sm text-muted-foreground">No credit card. Works in Chrome, Edge and Brave.</p>
 
-            <div className="mx-auto mt-14 max-w-5xl overflow-hidden rounded-xl border border-border shadow-2xl shadow-black/60">
+            {/* The screenshot runs from the cards down to the weekly chart; show
+                the cards and the Focus Coach, then fade out. */}
+            <div className="relative mx-auto mt-14 aspect-[2850/2150] max-w-5xl overflow-hidden rounded-xl border border-border shadow-2xl shadow-black/60">
               <Image
                 src="/screenshots/dashboard.png"
-                alt="FocusSmith dashboard showing today's focus time, distractions and a weekly chart"
-                width={2271}
-                height={1331}
+                alt="FocusSmith dashboard with today's focus time, blocked distractions, an AI summary and a Focus Coach conversation"
+                width={2850}
+                height={3129}
                 priority
-                className="h-auto w-full"
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="absolute inset-x-0 top-0 h-auto w-full"
               />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
             </div>
           </div>
         </section>
