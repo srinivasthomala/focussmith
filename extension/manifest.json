@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "FocusSmith",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Block distracting sites during focus sessions of any length, and see your focus stats and AI insights on your dashboard.",
   "permissions": [
     "storage",
@@ -10,8 +10,7 @@
     "notifications"
   ],
   "host_permissions": [
-    "https://api.focussmith.com/*",
-    "http://localhost:8000/*"
+    "https://api.focussmith.com/*"
   ],
   "icons": {
     "16": "icons/icon16.png",

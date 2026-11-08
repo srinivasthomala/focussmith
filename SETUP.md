@@ -58,7 +58,7 @@ Open `http://localhost:3000`, sign up on the login page, and you'll land on the 
 ## Step 4: Load and connect the Chrome extension
 
 1. Go to `chrome://extensions/`, enable **Developer mode**, click **Load unpacked**, and select the `extension/` folder.
-2. **Point it at your local API.** The extension targets the production API by default. On `chrome://extensions/`, open the FocusSmith **service worker** inspector and run:
+2. **Point it at your local API.** The extension targets the production API by default, and its manifest only allows that host. For local work, add `"http://localhost:8000/*"` to `host_permissions` in `extension/manifest.json` (don't commit it), reload the extension, then on `chrome://extensions/` open the FocusSmith **service worker** inspector and run:
    ```js
    chrome.storage.local.set({ apiBaseUrl: 'http://localhost:8000' })
    ```

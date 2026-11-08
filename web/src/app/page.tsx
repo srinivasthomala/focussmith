@@ -52,7 +52,7 @@ const faqs = [
   },
   {
     q: 'Can I use the timer without an account?',
-    a: 'Yes. The timer and blocking work on their own. You need a free account to sync your blocked sites, see your stats and use the Focus Coach.',
+    a: 'Yes, the timer works on its own. To choose which sites to block, see your stats and use the Focus Coach, create a free account. It takes about a minute.',
   },
   {
     q: 'Can I delete my data?',
