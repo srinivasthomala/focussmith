@@ -24,6 +24,11 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_settings().cors_origins,
+    # The browser extension (Chrome and Edge both use chrome-extension://<32
+    # letters a-p>) calls the API directly. Allowing that origin means the
+    # extension needs no host permission. Safe because the API authenticates
+    # with a bearer key in a header, never with cookies.
+    allow_origin_regex=r"^chrome-extension://[a-p]{32}$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
