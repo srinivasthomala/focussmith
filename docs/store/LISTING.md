@@ -119,10 +119,7 @@ Ends focus sessions on time, updates the minutes-left badge on the toolbar icon,
 Shows one notification when a focus session ends, so the user knows they can take a break.
 ```
 
-Host permission `https://api.focussmith.com/*`
-```
-This is FocusSmith's own server. The extension uses it to download the user's blocked sites and to upload their session times and blocked attempts to their dashboard. The extension does not access any other website's content.
-```
+**Host permissions:** none. The extension talks only to FocusSmith's own server (api.focussmith.com), which allows it through CORS, so no host permission is requested.
 
 **Are you using remote code?** No. All JavaScript is included in the extension package.
 
