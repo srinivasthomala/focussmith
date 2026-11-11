@@ -171,3 +171,50 @@ https://focussmith.com/privacy
 
 The timer also works without an account; blocking needs a list of sites, which is managed from the dashboard.
 ```
+
+---
+
+## Microsoft Edge Add-ons
+
+Partner Center: https://partner.microsoft.com/dashboard/microsoftedge (free developer account).
+Upload the same zip as Chrome. The extension is tested in Edge and works unchanged.
+
+**Availability**
+- Visibility: Public
+- Markets: All markets
+
+**Properties**
+
+| Field | Value |
+|---|---|
+| Category | Productivity |
+| Privacy policy | Yes, `https://focussmith.com/privacy` |
+| Website | `https://focussmith.com` |
+| Support contact | `focussmith.app@gmail.com` |
+| Mature content | No |
+
+**Store listing (English)**
+
+| Field | Value |
+|---|---|
+| Description | The same Description block as Chrome above |
+| Extension Store logo | `logo-300x300.png` |
+| Small promotional tile | `promo-small-440x280.png` |
+| Screenshots | `1-timer.png` … `5-setup.png`, same order as Chrome |
+| Large promotional tile | `marquee-1400x560.png` |
+| YouTube video | leave empty |
+| Short description | The same Summary as Chrome above |
+
+**Search terms** (one per box)
+
+```
+focus timer
+site blocker
+block websites
+pomodoro
+deep work
+distraction blocker
+productivity
+```
+
+**Notes for certification:** paste the same test instructions as the Chrome "Test instructions" block above.
